@@ -12,5 +12,14 @@ namespace Football_League.DAL.Repositories
         {
             return !await _dbSet.AnyAsync(p => p.TeamId == teamId && p.JerseyNumber == jerseyNumber && p.Id != playerId);
         }
+        public async Task<IEnumerable<Player>> GetTopScorersAsync()
+        {
+            return await _dbSet
+                .Include(p => p.Team)
+                .Where(p => p.GoalsScored > 0)
+                .OrderByDescending(p => p.GoalsScored)
+                .AsNoTracking()
+                .ToListAsync();
+        }
     }
 }

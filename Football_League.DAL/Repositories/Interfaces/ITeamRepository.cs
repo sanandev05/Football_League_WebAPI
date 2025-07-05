@@ -11,5 +11,7 @@ namespace Football_League.DAL.Repositories.Interfaces
     {
         Task<bool> IsTeamNameUniqueAsync(string name, int? teamId = null);
         Task<bool> IsTeamCodeUniqueAsync(int code, int? teamId = null);
+        Task<Team> GetTeamWithPlayersAsync(int teamId); 
+
     }
 }

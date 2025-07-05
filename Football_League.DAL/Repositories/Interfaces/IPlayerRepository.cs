@@ -10,5 +10,6 @@ namespace Football_League.DAL.Repositories.Interfaces
     public interface IPlayerRepository : IGenericRepository<Player>
     {
         Task<bool> IsJerseyNumberUniqueAsync(int jerseyNumber, int teamId, int? playerId = null);
+        Task<IEnumerable<Player>> GetTopScorersAsync();
     }
 }

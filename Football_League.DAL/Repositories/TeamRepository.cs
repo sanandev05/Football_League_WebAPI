@@ -17,5 +17,9 @@ namespace Football_League.DAL.Repositories
         {
             return !await _dbSet.AnyAsync(t => t.Code == code && t.Id != teamId);
         }
+        public async Task<Team> GetTeamWithPlayersAsync(int teamId)
+        {
+            return await _dbSet.Include(t => t.Players).FirstOrDefaultAsync(t => t.Id == teamId);
+        }
     }
 }
