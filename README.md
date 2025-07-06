@@ -1,5 +1,7 @@
 # Football League Web API
 
+⚠️ **This project is currently under development.** Features and APIs may change as work progresses.
+
 A RESTful Web API built with ASP.NET Core for managing football league data, including teams, players, matches, and league standings.
 
 ## Features
