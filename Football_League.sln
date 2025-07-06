@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Football_League.DAL", "Foot
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Football_League.BLL", "Football_League.BLL\Football_League.BLL.csproj", "{AA11B7EB-29D9-485A-99C1-8C8320636AD6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Football_League.WepAPI", "Football_League.WepAPI\Football_League.WepAPI.csproj", "{EFD018EF-07C2-444B-B631-3D3A0767FF72}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AA11B7EB-29D9-485A-99C1-8C8320636AD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AA11B7EB-29D9-485A-99C1-8C8320636AD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AA11B7EB-29D9-485A-99C1-8C8320636AD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EFD018EF-07C2-444B-B631-3D3A0767FF72}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EFD018EF-07C2-444B-B631-3D3A0767FF72}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EFD018EF-07C2-444B-B631-3D3A0767FF72}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EFD018EF-07C2-444B-B631-3D3A0767FF72}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
