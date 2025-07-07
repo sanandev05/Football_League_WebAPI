@@ -22,7 +22,7 @@ namespace Football_League.BLL.Validators
             RuleForEach(m => m.GoalScorers).ChildRules(scorer =>
             {
                 scorer.RuleFor(s => s.PlayerId).NotEmpty();
-                scorer.RuleFor(s => s.GoalsCount).GreaterThan(0);
+                scorer.RuleFor(s => s.GoalMinute).GreaterThan(0);
             });
         }
 

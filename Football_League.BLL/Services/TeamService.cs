@@ -1,17 +1,17 @@
-﻿
-using AutoMapper;
+﻿using AutoMapper;
+using Football_League.BLL.Services.Interfaces;
 using Football_League.DAL.Entities;
 using Football_League.DAL.Repositories.Interfaces;
 using static Football_League.BLL.Dtos.Dtos;
 
-namespace Football_League.BLL.Services.Interfaces
+namespace Football_League.BLL.Services
 {
     public class TeamService : ITeamService
     {
-        private readonly ITeamRepository _teamRepository;
+        private readonly IGenericRepository<Team> _teamRepository;
         private readonly IMapper _mapper;
 
-        public TeamService(ITeamRepository teamRepository, IMapper mapper)
+        public TeamService(IGenericRepository<Team> teamRepository, IMapper mapper)
         {
             _teamRepository = teamRepository;
             _mapper = mapper;
@@ -35,7 +35,7 @@ namespace Football_League.BLL.Services.Interfaces
                 throw new Exception("Komanda adı artıq mövcuddur.");
 
             if (!await IsTeamCodeUniqueAsync(dto.Code))
-                throw new Exception("Komanda kodu artıq istifadə olunub.");
+                throw new Exception("Komanda kodu artıq mövcuddur.");
 
             var team = new Team
             {
@@ -63,13 +63,13 @@ namespace Football_League.BLL.Services.Interfaces
                 throw new Exception("Komanda adı artıq mövcuddur.");
 
             if (!await IsTeamCodeUniqueAsync(dto.Code, id))
-                throw new Exception("Komanda kodu artıq istifadə olunub.");
+                throw new Exception("Komanda kodu artıq mövcuddur.");
 
             team.Name = dto.Name;
             team.Code = dto.Code;
             team.StadiumId = dto.StadiumId;
 
-             _teamRepository.Update(team);
+            _teamRepository.Update(team);
         }
 
         public async Task DeleteAsync(int id)
@@ -81,14 +81,14 @@ namespace Football_League.BLL.Services.Interfaces
             _teamRepository.Delete(team);
         }
 
-        public Task<bool> IsTeamNameUniqueAsync(string name, int? teamId = null)
+        public async Task<bool> IsTeamNameUniqueAsync(string name, int? teamId = null)
         {
-            return _teamRepository.AnyAsync(t => t.Name == name && t.Id != teamId);
+            return !await _teamRepository.AnyAsync(t => t.Name == name && (!teamId.HasValue || t.Id != teamId.Value));
         }
 
-        public Task<bool> IsTeamCodeUniqueAsync(int code, int? teamId = null)
+        public async Task<bool> IsTeamCodeUniqueAsync(int code, int? teamId = null)
         {
-            return _teamRepository.AnyAsync(t => t.Code == code && t.Id != teamId);
+            return !await _teamRepository.AnyAsync(t => t.Code == code && (!teamId.HasValue || t.Id != teamId.Value));
         }
     }
 }

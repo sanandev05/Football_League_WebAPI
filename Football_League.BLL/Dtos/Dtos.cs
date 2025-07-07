@@ -17,7 +17,7 @@ namespace Football_League.BLL.Dtos
         public record TeamDto(int Id, string Name, int Code, int Wins, int Draws, int Losses, int GoalsFor, int GoalsAgainst, StadiumDto Stadium);
         public record TeamSaveDto(string Name, int Code, int StadiumId);
 
-        public record GoalScorerDto(int PlayerId, int GoalsCount);
+        public record GoalScorerDto(int PlayerId, int GoalMinute);
         public record MatchDto(int Id, int Week, int HomeTeamId, int AwayTeamId, int HomeTeamGoals, int AwayTeamGoals, IEnumerable<GoalScorerDto> GoalScorers);
         public record MatchSaveDto(int Week, int HomeTeamId, int AwayTeamId, int HomeTeamGoals, int AwayTeamGoals, IEnumerable<GoalScorerDto> GoalScorers);
 

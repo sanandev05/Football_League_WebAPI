@@ -12,12 +12,15 @@ namespace Football_League.DAL
         public static IServiceCollection AddDalServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddDbContext<FootballLeagueContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<ITeamRepository, TeamRepository>();
             services.AddScoped<IStadiumRepository, StadiumRepository>();
             services.AddScoped<IPlayerRepository, PlayerRepository>();
             services.AddScoped<IMatchRepository, MatchRepository>();
+
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
             return services;
         }
     }

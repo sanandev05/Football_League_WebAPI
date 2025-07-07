@@ -4,74 +4,75 @@ using static Football_League.BLL.Dtos.Dtos;
 
 namespace Football_League.WepAPI.Controllers
 {
-    [ApiController]
     [Route("api/[controller]")]
-    public class TeamController : ControllerBase
+    [ApiController]
+    public class MatchController : ControllerBase
     {
-        private readonly ITeamService _teamService;
+        private readonly IMatchService _matchService;
 
-        public TeamController(ITeamService teamService)
+        public MatchController(IMatchService matchService)
         {
-            _teamService = teamService;
+            _matchService = matchService;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var teams = await _teamService.GetAllAsync();
-            return Ok(teams);
+            var matches = await _matchService.GetAllAsync();
+            return Ok(matches);
         }
 
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var team = await _teamService.GetByIdAsync(id);
-            if (team == null)
+            var match = await _matchService.GetByIdAsync(id);
+            if (match == null)
                 return NotFound();
 
-            return Ok(team);
+            return Ok(match);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] TeamSaveDto dto)
+        public async Task<IActionResult> Create([FromBody] MatchSaveDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
-            var created = await _teamService.CreateAsync(dto);
-            return CreatedAtAction(nameof(GetById), new { id = created.Id }, created);
+            var createdMatch = await _matchService.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetById), new { id = createdMatch.Id }, createdMatch);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] TeamSaveDto dto)
+        public async Task<IActionResult> Update(int id, [FromBody] MatchSaveDto dto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
             try
             {
-                await _teamService.UpdateAsync(id, dto);
-                return NoContent();
+                await _matchService.UpdateAsync(id, dto);
             }
             catch (Exception ex)
             {
                 return NotFound(ex.Message);
             }
-        }
 
+            return NoContent();
+        }
 
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                await _teamService.DeleteAsync(id);
-                return NoContent(); 
+                await _matchService.DeleteAsync(id);
             }
             catch (Exception ex)
             {
-                return NotFound(new { error = ex.Message });
+                return NotFound(ex.Message);
             }
+
+            return NoContent();
         }
     }
 }

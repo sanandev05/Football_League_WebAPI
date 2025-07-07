@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 using Football_League.DAL.Repositories.Interfaces;
-using static Football_League.BLL.Dtos.TeamDtos;
+using static Football_League.BLL.Dtos.Dtos;
 
 namespace Football_League.BLL.Validators
 {

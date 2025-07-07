@@ -5,6 +5,11 @@ namespace Football_League.BLL.Services.Interfaces
 {
     public interface IMatchService
     {
-        Task<Match> CreateMatchAndUpdateStatsAsync(MatchSaveDto dto);
+        Task<IEnumerable<MatchDto>> GetAllAsync();
+        Task<MatchDto?> GetByIdAsync(int id);
+        Task<MatchDto> CreateAsync(MatchSaveDto dto);
+        Task UpdateAsync(int id, MatchSaveDto dto);
+        Task DeleteAsync(int id);
+        Task<MatchDto> CreateMatchAndUpdateStatsAsync(MatchSaveDto dto);
     }
 }

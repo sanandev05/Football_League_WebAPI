@@ -43,10 +43,16 @@ public class GenericRepository<T> : IGenericRepository<T> where T : BaseEntity, 
         return await query.AsNoTracking().ToListAsync();
     }
 
-    public async Task<T> GetByIdAsync(int id)
+    public async Task<T> GetByIdAsync(int id, params Expression<Func<T, object>>[] includes)
     {
-        return await _dbSet.FindAsync(id);
+        IQueryable<T> query = _dbSet;
+
+        if (includes != null)
+            query = includes.Aggregate(query, (current, include) => current.Include(include));
+
+        return await query.FirstOrDefaultAsync(e => e.Id == id);
     }
+
 
     public async Task<bool> AnyAsync(Expression<Func<T, bool>> predicate)
     {

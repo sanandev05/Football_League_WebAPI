@@ -49,9 +49,11 @@ namespace Football_League.BLL.Services
 
             stadium.Name = dto.Name;
             stadium.Capacity = dto.Capacity;
+            stadium.UpdateTime = DateTime.UtcNow; 
 
-             _stadiumRepository.Update(stadium);
+            await _stadiumRepository.Update(stadium);
         }
+
 
         public async Task DeleteAsync(int id)
         {

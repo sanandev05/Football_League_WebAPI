@@ -1,6 +1,8 @@
+using Football_League.BLL;
 using Football_League.BLL.Mapping;
 using Football_League.BLL.Services;
 using Football_League.BLL.Services.Interfaces;
+using Football_League.DAL;
 using Football_League.DAL.Data;
 using Football_League.DAL.Entities;
 using Football_League.DAL.Repositories;
@@ -18,12 +20,8 @@ namespace Football_League.WepAPI
             // Add services to the container.
             builder.Services.AddDbContext<FootballLeagueContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("StudentAppDb")));
-
-            builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
-            builder.Services.AddScoped<ITeamRepository, TeamRepository>();
-            builder.Services.AddScoped<ITeamService, TeamService>();
-            builder.Services.AddScoped<IStadiumRepository, StadiumRepository>();
-            builder.Services.AddScoped<IStadiumService, StadiumService>();
+            builder.Services.AddDalServices(builder.Configuration);
+            builder.Services.AddBLLServices();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using static Football_League.BLL.Dtos.StadiumDtos;
+using static Football_League.BLL.Dtos.Dtos;
 
 namespace Football_League.BLL.Validators
 {
